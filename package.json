@@ -1,0 +1,24 @@
+{
+  "name": "dw1_tarea3",
+  "version": "1.0.0",
+  "description": "tarea semana 3, asuntos hacer CRUD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adbelrivera2019/DW1_Tarea3.git"
+  },
+  "author": "carg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adbelrivera2019/DW1_Tarea3/issues"
+  },
+  "homepage": "https://github.com/adbelrivera2019/DW1_Tarea3#readme",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "xpress": "^2.4.6"
+  },
+  "devDependencies": {}
+}
