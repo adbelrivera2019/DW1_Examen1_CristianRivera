@@ -1,0 +1,1448 @@
+const mysql = require('mysql');
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.use(function (req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+	next();
+});
+
+app.get('/crivera/api/sucursal/', (req, res)=>{
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from sucursal";
+
+    con.connect(function(err){
+
+        if (err){
+            res.send(err);
+        }else{
+            con.query(sql, function(err, result){
+
+                if (err){
+                    res.send(err);
+                }else{
+                    res.send(result);
+                }
+            });
+        }
+    } );
+
+});
+//************* GET CLIENTE ID **************
+app.get('/crivera/api/sucursal/:id', (req,res)=>{
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from sucursal where id_sucursal = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function(err){
+
+        if (err){
+            res.send(err);
+        }else{
+            con.query(sql, parametros, function(err, result){
+                if (err){
+                    res.send(err);
+                }else{
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//************* POST CLIENTE **************
+app.post('/crivera/api/sucursal/', (req, res)=>{
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into sucursal " +
+            " (id_sucursal,ciudad, departamento, telefono) " +
+            " values (?, ?, ?, ?)";
+    
+    let parametros = [  req.body.id_sucursal, 
+                        req.body.ciudad, 
+                        req.body.departamento,
+                        req.body.telefono
+                    ];
+
+    con.connect(function(err){
+
+        if (err){
+            res.send(err);
+        }else{
+            con.query(sql, parametros, function(err, result){
+                if (err){
+                    res.send(err);
+                }else{
+                    res.send(result);
+                }
+            });
+        }
+    });
+} );
+//************* PUT CLIENTE **************
+app.put('/crivera/api/sucursal/:id', (req, res)=>{
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update sucursal set ciudad = ?, " +
+                " departamento = ?,  "+
+                " telefono = ? "+
+                " where id_sucursal = ? ";
+
+    let parametros = [  req.body.ciudad, 
+                        req.body.departamento, 
+                        req.body.telefono, 
+                        req.params.id];
+
+    con.connect(function(err){
+
+        if (err){
+            res.send(err);
+        }else{
+            con.query(sql, parametros, function(err, result){
+                if (err){
+                    res.send(err);
+                }else{
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+
+app.delete('/crivera/api/sucursal/:id', (req, res)=>{
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from sucursal where id_sucursal = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function(err){
+
+        if (err){
+            res.send(err);
+        }else{
+            con.query(sql, parametros, function(err, result){
+                if (err){
+                    res.send(err);
+                }else{
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+
+
+//****************************************************** */
+//*****************  PRODUCTO  ************************* */
+app.get('/crivera/api/producto/', (req, res) => {
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from producto";
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, function (err, result) {
+
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.get('/crivera/api/producto/:id', (req, res) => {
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from producto where id_producto = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.post('/crivera/api/producto/', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into producto " +
+        " (id_producto,nombre, proveedor, descripcion,cantidad_bodega,precio) " +
+        " values (?, ?, ?, ?,?,?)";
+
+    let parametros = [req.body.id_producto,
+        req.body.nombre,
+        req.body.proveedor,
+        req.body.descripcion,
+        req.body.cantidad_bodega,
+        req.body.precio
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+
+app.put('/crivera/api/producto/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update producto set nombre = ?, " +
+        " proveedor = ?,  " +
+        " descripcion = ?, " +
+        " cantidad_bodega = ?,  " +
+        " precio = ? " +
+        " where id_producto = ? ";
+
+    let parametros = [req.body.nombre,
+        req.body.proveedor,
+        req.body.descripcion,
+        req.body.cantidad_bodega,
+        req.body.precio,
+        req.params.id
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.delete('/crivera/api/producto/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from producto where id_producto = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//******************************************************* */
+//******************************************************* */
+//*****************  EMPLEADO  ************************* */
+app.get('/crivera/api/empleado/', (req, res) => {
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from empleado";
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, function (err, result) {
+
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.get('/crivera/api/empleado/:id', (req, res) => {
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from empleado where id_empleado = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.post('/crivera/api/empleado/', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into empleado " +
+        " (id_empleado,nombre, apellido, id_sucursal) " +
+        " values (?, ?, ?, ?)";
+
+    let parametros = [req.body.id_empleado,
+        req.body.nombre,
+        req.body.apellido,
+        req.body.id_sucursal
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+
+app.put('/crivera/api/empleado/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update empleado set nombre = ?, " +
+        " apellido = ?,  " +
+        " id_sucursal = ? " +
+        " where id_empleado = ? ";
+
+    let parametros = [req.body.nombre,
+        req.body.apellido,
+        req.body.id_sucursal,
+        req.params.id
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.delete('/crivera/api/empleado/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from empleado where id_empleado = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//******************************************************* */
+
+//******************************************************* */
+//*****************     ESTADO  ************************* */
+app.get('/crivera/api/estado/', (req, res) => {
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from estado";
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, function (err, result) {
+
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.get('/crivera/api/estado/:id', (req, res) => {
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from estado where id_estado = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.post('/crivera/api/estado/', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into estado " +
+        " (id_estado,descripcion) " +
+        " values (?, ?)";
+
+    let parametros = [req.body.id_estado,
+        req.body.descripcion
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+app.put('/crivera/api/estado/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update estado set descripcion = ? " +
+        " where id_estado = ? ";
+
+    let parametros = [req.body.descripcion,
+        req.params.id
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.delete('/crivera/api/estado/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from estado where id_estado = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//******************************************************* */
+//******************************************************* */
+//*****************     CLIENTE  ************************* */
+app.get('/crivera/api/cliente/', (req, res) => {
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from cliente";
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, function (err, result) {
+
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.get('/crivera/api/cliente/:id', (req, res) => {
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from cliente where id_cliente = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.post('/crivera/api/cliente/', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into cliente " +
+        " (id_cliente,nombre,apellido,ciudad,id_empleado) " +
+        " values (?, ?, ?, ?, ?)";
+
+    let parametros = [req.body.id_cliente,
+        req.body.nombre,
+        req.body.apellido,
+        req.body.ciudad,
+        req.body.id_empleado
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+app.put('/crivera/api/cliente/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update cliente set nombre = ?, " +
+    " apellido = ?,  " +
+    " ciudad = ?,  " +
+    " id_empleado = ?  " +
+    " where id_cliente = ? ";
+
+    let parametros = [req.body.nombre,
+        req.body.apellido,
+        req.body.ciudad,
+        req.body.id_empleado,
+        req.params.id
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.delete('/crivera/api/cliente/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from cliente where id_cliente = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//******************************************************* */
+//*****************  PEDIDO  ************************* */
+app.get('/crivera/api/pedido/', (req, res) => {
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from pedido";
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, function (err, result) {
+
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.get('/crivera/api/pedido/:id', (req, res) => {
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from pedido where id_pedido = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.post('/crivera/api/pedido/', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into pedido " +
+        " (id_pedido,fecha_pedido, fecha_entrega, id_estado,id_cliente,id_empleado) " +
+        " values (?, ?, ?, ?,?,?)";
+
+    let parametros = [req.body.id_pedido,
+        req.body.fecha_pedido,
+        req.body.fecha_entrega,
+        req.body.id_estado,
+        req.body.id_cliente,
+        req.body.id_empleado
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+app.put('/crivera/api/pedido/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update pedido set fecha_pedido = ?, " +
+        " fecha_entrega = ?,  " +
+        " id_estado = ?, " +
+        " id_cliente = ?,  " +
+        " id_empleado = ?  " +
+        " where id_pedido = ? ";
+
+    let parametros = [req.body.fecha_pedido,
+        req.body.fecha_entrega,
+        req.body.id_estado,
+        req.body.id_cliente,
+        req.body.id_empleado,
+        req.params.id
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.delete('/crivera/api/pedido/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from pedido where id_pedido = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//******************************************************* */
+//******************************************************* */
+//***************  DETALLES PEDIDO  ******************* */
+app.get('/crivera/api/detalles_pedido/', (req, res) => {
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from detalles_pedido";
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, function (err, result) {
+
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.get('/crivera/api/detalles_pedido/:id', (req, res) => {
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from detalles_pedido where id_pedido = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.post('/crivera/api/detalles_pedido/', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into detalles_pedido " +
+        " (id_pedido,id_producto,cantidad, precio) " +
+        " values (?, ?, ?,?)";
+
+    let parametros = [req.body.id_pedido,
+        req.body.id_producto,
+        req.body.cantidad,
+        req.body.precio
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+app.put('/crivera/api/detalles_pedido/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update detalles_pedido set id_producto = ?, " +
+        " cantidad = ?, " +
+        " precio = ? " +
+        " where id_pedido = ? ";
+
+    let parametros = [req.body.id_producto,
+        req.body.cantidad,
+        req.body.precio,
+        req.params.id
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.delete('/crivera/api/detalles_pedido/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from detalles_pedido where id_pedido = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//******************************************************* */
+//******************************************************* */
+//*****************   FORMA PAGO  *********************** */
+app.get('/crivera/api/formapago/', (req, res) => {
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from formapago";
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, function (err, result) {
+
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.get('/crivera/api/formapago/:id', (req, res) => {
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from formapago where id_formapago = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.post('/crivera/api/formapago/', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into formapago " +
+        " (id_formapago,descripcion) " +
+        " values (?, ?)";
+
+    let parametros = [req.body.id_formapago,
+        req.body.descripcion
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+app.put('/crivera/api/formapago/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update formapago set descripcion = ? " +
+        " where id_formapago = ? ";
+
+    let parametros = [req.body.descripcion,
+        req.params.id
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.delete('/crivera/api/formapago/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from formapago where id_formapago = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//******************************************************* */
+//******************************************************* */
+//*****************     PAGO    ************************* */
+app.get('/crivera/api/pago/', (req, res) => {
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from pago";
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, function (err, result) {
+
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.get('/crivera/api/pago/:id', (req, res) => {
+
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "select * from pago where id_cliente = ?";
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.post('/crivera/api/pago/', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "insert into pago " +
+        " (id_cliente,id_formapago, fecha_pago, total,id_pedido) " +
+        " values (?, ?, ?, ?,?,?)";
+
+    let parametros = [req.body.id_cliente,
+        req.body.id_formapago,
+        req.body.fecha_pago,
+        req.body.total,
+        req.body.id_pedido
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+app.put('/crivera/api/pago/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = " update pago set id_formapago = ?, " +
+        " fecha_pago = ?,  " +
+        " total = ?, " +
+        " id_pedido = ?  " +
+        " where id_cliente = ? ";
+
+    let parametros = [req.body.id_formapago,
+        req.body.fecha_pago,
+        req.body.total,
+        req.body.id_pedido,
+        req.params.id
+    ];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+app.delete('/crivera/api/pago/:id', (req, res) => {
+
+    let con = mysql.createConnection({
+        host: "localhost",
+        user: "desfhyeb_crivera",
+        password: "Hola12345$",
+        database: "desfhyeb_crivera"
+    });
+
+    let sql = "delete from pago where id_cliente = ?";
+
+    let parametros = [req.params.id];
+
+    con.connect(function (err) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            con.query(sql, parametros, function (err, result) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        }
+    });
+
+});
+//******************************************************* */
+
+app.listen();
