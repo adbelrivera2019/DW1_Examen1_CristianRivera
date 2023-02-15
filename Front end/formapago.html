@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Form Forma de Pago</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="formapago.js"></script>
+      </head>
+      <body>
+
+        <div class="container">
+            <h1>Formulario Detalle Forma de Pago</h1>
+            <p>Tendremos todas las funcionalidades de la tabla Detalle Forma de Pago</p>
+            
+            <h5>Form Edicion</h5>
+    
+            <form id="datosEnviarDetallePedido">
+                <div class="mb-3 mt-3">
+                    <label for="idformapago" class="form-label">Id pago:</label>
+                    <input type="number" class="form-control" id="idformapago" placeholder="Ingresar Id" name="idformapago">
+                  </div>
+              
+              <div class="mb-3 mt-3">
+                <label for="descripcion" class="form-label">descripcion:</label>
+                <input type="text" class="form-control" id="descripcion" placeholder="Ingresar Descripcion" name="descripcion">
+              </div>
+              
+              <button type="button"   
+                onclick="cargarDatosFPago()"
+              class="btn btn-dark">Ver Datos</button>
+              <button type="button"   
+                onclick="insertarDatosFPago()"
+              class="btn btn-primary">Insertar Datos</button>
+    
+              <button type="button"   
+                onclick="actualizarDatosFPago()"
+              class="btn btn-warning">Actualizar Datos</button>
+    
+              <button type="button"   
+                onclick="borrarDatosFPago()"
+              class="btn btn-danger">Borrar Datos</button>
+            </form>
+    
+            <table  class="table" id="reporteFPago">
+    
+            </table>
+    
+            
+    
+    
+        </div>
+    
+        
+    </body>
+</html>

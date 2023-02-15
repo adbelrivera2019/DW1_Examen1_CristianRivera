@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Form Cliente</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="cliente.js"></script>
+      </head>
+      <body>
+
+        <div class="container">
+            <h1>Formulario Cliente</h1>
+            <p>Tendremos todas las funcionalidades de la tabla Cliente</p>
+            
+            <h5>Form Edicion</h5>
+    
+            <form id="datosEnviarSucursal">
+    
+              <div class="mb-3 mt-3">
+                <label for="idcliente" class="form-label">Id Cliente:</label>
+                <input type="number" class="form-control" id="idcliente" placeholder="Ingresar Id" name="idcliente">
+              </div>
+              <div class="mb-3 mt-3">
+                <label for="nombrecliente" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombrecliente" placeholder="Ingresar Nombre" name="nombrecliente">
+              </div>
+              <div class="mb-3 mt-3">
+                <label for="apellidocliente" class="form-label">Apellido:</label>
+                <input type="text" class="form-control" id="apellidocliente" placeholder="Ingresar Apellido" name="apellidocliente">
+              </div>
+              <div class="mb-3 mt-3">
+                <label for="ciudadcliente" class="form-label">Ciudad:</label>
+                <input type="text" class="form-control" id="ciudadcliente" placeholder="Ingresar Ciudad" name="ciudadcliente">
+              </div>
+              <div class="mb-3 mt-3">
+                <label for="idempleadoc" class="form-label">Id Empleado:</label>
+                <input type="text" class="form-control" id="idempleadoc" placeholder="Ingresar Id" name="idempleadoc">
+              </div>
+              <button type="button"   
+                onclick="cargarDatosCliente()"
+              class="btn btn-dark">Ver Datos</button>
+              <button type="button"   
+                onclick="insertarDatosCliente()"
+              class="btn btn-primary">Insertar Datos</button>
+    
+              <button type="button"   
+                onclick="actualizarDatosCliente()"
+              class="btn btn-warning">Actualizar Datos</button>
+    
+              <button type="button"   
+                onclick="borrarDatosCliente()"
+              class="btn btn-danger">Borrar Datos</button>
+            </form>
+    
+            <table  class="table" id="reporteCliente">
+    
+            </table>
+    
+            
+    
+    
+        </div>
+    
+        
+    </body>
+</html>
